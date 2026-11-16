@@ -197,7 +197,7 @@ Do not copy a gateway IP from another computer; WSL2 addresses can change.
 6. Add a Windows Firewall inbound rule for TCP 11434 scoped to the actual WSL2 subnet. Determine the current subnet on that machine and use it in the rule. Example only (the subnet below is not universal):
 
 ```powershell
-New-NetFirewallRule -DisplayName "Ollama API - WSL2 Only" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 11434 -RemoteAddress <YOUR_WSL2_SUBNET> -Profile Any
+New-NetFirewallRule -DisplayName "Ollama API - WSL2 Only" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 11434 -RemoteAddress "YOUR_WSL2_SUBNET" -Profile Any
 ```
 
 Replace the placeholder with the actual subnet in CIDR notation. Review existing firewall rules as well; this rule alone does not prove that no other rule permits access.
