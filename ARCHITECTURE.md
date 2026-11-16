@@ -73,3 +73,24 @@ The browser-facing host ports are not used for the Open WebUI-to-MCP connection.
 - The MCP service should remain on the internal Docker network for application-to-application traffic.
 - Ollama's host API needs a narrowly scoped firewall allowance for the WSL2 environment; do not expose it publicly.
 - Secrets and application data stay on the local machine and are excluded from this repository.
+
+## Future MCP gateway architecture
+
+The current implementation has a direct connection from Open WebUI to the SearXNG MCP server. The future design may introduce an MCP gateway/aggregator as a single client-facing endpoint:
+
+```mermaid
+flowchart TB
+    WEBUI["Open WebUI"] <-->|"Single MCP connection"| GATEWAY["MCP Gateway / Aggregator"]
+    GATEWAY --> SEARCH["SearXNG MCP"]
+    GATEWAY --> DB["PostgreSQL MCP"]
+    GATEWAY --> LINUX["Linux infrastructure MCP"]
+    GATEWAY --> NETWORK["Network MCP"]
+    GATEWAY --> K8S["Kubernetes / OpenShift MCP"]
+    SEARCH --> SEARX["SearXNG"]
+    DB --> POSTGRES["PostgreSQL"]
+    LINUX --> HOSTS["Linux hosts"]
+    NETWORK --> SWITCHES["Cisco / Arista systems"]
+    K8S --> CLUSTER["Kubernetes / OpenShift APIs"]
+```
+
+This is a planned architecture only. It is not part of the currently deployed stack. The gateway would route requests and apply shared access policies, while specialized backend MCP servers would retain their own credentials, permissions, and backend integrations. Candidate projects and an evaluation checklist are documented in [FUTURE_ROADMAP.md](FUTURE_ROADMAP.md).
