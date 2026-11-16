@@ -345,6 +345,22 @@ This demonstrates that Qwen invoked the SearXNG search tool through the MCP conn
 
 SearXNG relies on external search engines. Individual engines may throttle, block, or change their response behavior. A search failure from one engine does not necessarily mean the MCP connection is broken.
 
+## Production readiness
+
+The current setup is a working local prototype, not a production-hardened service. The recommended hardening work includes pinned container versions, restricted network exposure, authenticated MCP access when needed, least-privilege backend accounts, backups with restore tests, monitoring, and a documented upgrade/rollback process.
+
+See [PRODUCTION_READINESS.md](PRODUCTION_READINESS.md) for the detailed checklist and phased implementation plan.
+
+## Future projects: MCP gateway and multiple tools
+
+The current Open WebUI configuration connects directly to the SearXNG MCP server. As the project grows, the planned direction is to evaluate an **MCP gateway/aggregator** so Open WebUI can use one client-facing MCP connection to reach multiple specialized upstream MCP servers.
+
+Potential integrations include PostgreSQL, Linux infrastructure, network equipment, Kubernetes/OpenShift, and monitoring. Each backend should remain isolated and use its own least-privilege credentials.
+
+Candidate gateways for evaluation include [Microsoft MCP Gateway](https://github.com/microsoft/mcp-gateway), [OpenZiti MCP Gateway](https://github.com/openziti/mcp-gateway), and [unrelated-ai MCP Gateway](https://github.com/unrelated-ai/mcp-gateway). No gateway has been selected or deployed. Compatibility, protocol versions, security features, maintenance, and operational requirements must be tested before adoption.
+
+See [FUTURE_ROADMAP.md](FUTURE_ROADMAP.md) for the target architecture and evaluation plan.
+
 ## Security and repository hygiene
 
 This repository is intended to contain documentation and safe examples, not live secrets or private runtime data.
