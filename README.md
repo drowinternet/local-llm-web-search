@@ -17,6 +17,10 @@ This repository documents the build, configuration, verification, startup, shutd
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the component diagram and network flow. For a deeper explanation of host-to-container and container-to-container routing, port publishing, Docker DNS, and the complete search request path, see [NETWORKING_BREAKDOWN.md](NETWORKING_BREAKDOWN.md).
 
+## Deploy on Linux, Windows, or macOS
+
+The current prototype can be deployed with native Ollama plus Docker-based Open WebUI, SearXNG, and the SearXNG MCP server. See [PLATFORM_DEPLOYMENT.md](PLATFORM_DEPLOYMENT.md) for platform-specific prerequisites, Ollama networking, deployment commands, MCP registration, verification, and lifecycle instructions. This is a deployment guide for the current architecture, not yet a one-command cross-platform installer.
+
 ## Components
 
 | Component | Purpose | Local endpoint |
